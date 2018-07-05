@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/entries')
 def load_entries():
 	try:
-		return models.Entry.get()
+		return models.Entry.return_entries()
 	except models.DoesNotExist:
 		return None
 	
@@ -26,4 +26,14 @@ def entry():
 	
 if __name__ == '__main__':
 	models.initialize()
+	try:
+		models.Entry.create_entry(
+			title='Senior Project',
+			date='',
+			timespent=30,
+			learned='I learned about hidden Markov models',
+			resources='Textblob'
+		)
+	except ValueError:
+		pass
 	app.run(debug=True)
