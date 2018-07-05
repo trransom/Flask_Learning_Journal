@@ -1,11 +1,12 @@
 import datetime
 
-from peewee import *
+from flask.ext.brcypt import generate_password_hash
 from flask.ext.login import UserMixin
+from peewee import *
 
 DATABASE = SqliteDatabase('journal.db')
 
-class Entry(UserMixin, Model):
+class Entry(Model):
 	title = CharField(max=100)
 	date = DateTimeField(default=datetime.datetime.now)
 	timespent = BigIntegerField()
@@ -14,3 +15,9 @@ class Entry(UserMixin, Model):
 	
 	class Meta:
 		database = DATABASE
+		order_by = ('-date',)
+		
+def initialize():
+	DATABASE.connect()
+	DATABASE.create_tables([Entry], safe=True)
+	DATABASE.close()
