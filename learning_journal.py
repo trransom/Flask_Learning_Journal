@@ -1,8 +1,9 @@
-from flask import Flask, g
+from flask import (Flask, g)
 
-from . import models
+import models
 
 app = Flask(__name__)
+
 
 @app.route('/entries')
 def load_entries():
