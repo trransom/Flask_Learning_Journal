@@ -1,4 +1,11 @@
 from flask import Flask
+from peewee import *
 
 app = Flask(__name__)
-app.run(debug=True, port=8000, host='0.0.0.0')
+
+@app.route('/')
+def index():
+	return 'TEST'
+	
+if __name__ == '__main__':
+	app.run(debug=True)
