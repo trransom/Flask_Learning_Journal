@@ -8,10 +8,8 @@ app = Flask(__name__)
 
 @app.route('/entries', methods=('GET', 'POST'))
 def list():
-	try:
-		return models.Entry.return_entries()
-	except models.DoesNotExist:
-		return None
+	stream = models.Entry.select().limit(100)
+	return render_template('index.html', stream=stream)
 	
 @app.route('/')
 def index():
