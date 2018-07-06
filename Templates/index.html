@@ -22,12 +22,11 @@
         <section>
             <div class="container">
                 <div class="entry-list">
-                    <form method="GET" action="" class="stream">
                     {% block content %}
 					{% for entry in stream %}
 						<article>
-							<h2><a href="{{ url_for('stream', entry.title) }}"></a></h2>
-							<time datetime="2016-01-31">January 31, 2016</time>
+							<h2><a href="{{ url_for('details', title=entry.title) }}">{{ entry.title }}</a></h2>
+							<p>{{ entry.date }}</p>
 						</article>
 					{% endfor %}
 					{% endblock %}

@@ -6,7 +6,7 @@ DATABASE = SqliteDatabase('journal.db')
 
 class Entry(Model):
 	title = CharField()
-	date = DateTimeField(default=datetime.datetime.now)
+	date = DateField()
 	timespent = BigIntegerField()
 	learned = TextField()
 	resources = TextField()
@@ -31,6 +31,10 @@ class Entry(Model):
 	@classmethod
 	def return_entries(cls):
 		return Entry.select()
+		
+	@classmethod
+	def return_date(cls):
+		return cls.date
 		
 		
 def initialize():

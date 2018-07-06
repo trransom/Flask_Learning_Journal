@@ -12,8 +12,10 @@ def list():
 	return render_template('index.html', stream=stream)
 	
 @app.route('/details', methods=('GET', 'POST'))
-def details():
-	pass
+def details(title=None):
+	entry = models.Entry.get(models.Entry.title=='Chatbot')
+	return render_template('detail.html', title=entry.title, timespent=entry.timespent,
+							learned=entry.learned, resources=entry.resources)
 	
 @app.route('/')
 def index():
@@ -35,14 +37,25 @@ def entry():
 	
 if __name__ == '__main__':
 	models.initialize()
-	try:
-		models.Entry.create_entry(
-			title='holder',
-			date='',
-			timespent=30,
-			learned='I learned about hidden Markov models',
-			resources='Textblob'
-		)
-	except ValueError:
-		pass
+#	try:
+##		models.Entry.create_entry(
+#			title='Chatbot',
+#			date='2018-01-01',
+#			timespent=30,
+#			learned='I learned about hidden Markov models',
+#			resources='Textblob'
+#		)
+#	except ValueError:
+#		pass
+#		
+#	try:
+#		models.Entry.create_entry(
+#			title='Python',
+#			date='2018-02-02',
+#			timespent=30,
+#			learned='I learned about inheritance',
+#			resources='Treehouse'
+#		)
+#	except ValueError:
+#		pass
 	app.run(debug=True)
