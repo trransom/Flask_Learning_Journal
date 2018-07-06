@@ -11,6 +11,10 @@ def list():
 	stream = models.Entry.select().limit(100)
 	return render_template('index.html', stream=stream)
 	
+@app.route('/details', methods=('GET', 'POST'))
+def details():
+	pass
+	
 @app.route('/')
 def index():
 	return 'Hey'
