@@ -13,7 +13,7 @@ def list():
 	
 @app.route('/details', methods=('GET', 'POST'))
 def details(title=None):
-	entry = models.Entry.get(models.Entry.title=='Chatbot')
+	entry = models.Entry.select(models.Entry.title==title)
 	return render_template('detail.html', title=entry.title, timespent=entry.timespent,
 							learned=entry.learned, resources=entry.resources)
 	
