@@ -29,6 +29,14 @@ class Entry(Model):
 			raise ValueError('Entry already exists')
 			
 	@classmethod
+	def edit_entry(cls, entry, title, date, timespent, learned, resources):
+		entry.tite=title
+		entry.date=date
+		entry.timespent=timespent
+		entry.learned=learned
+		entry.resources=resources
+			
+	@classmethod
 	def return_entries(cls):
 		return Entry.select()
 		
