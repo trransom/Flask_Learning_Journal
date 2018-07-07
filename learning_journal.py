@@ -12,10 +12,13 @@ def list():
 	return render_template('index.html', stream=stream)
 	
 @app.route('/details', methods=('GET', 'POST'))
-def details(title=None):
-	entry = models.Entry.select(models.Entry.title==title)
-	return render_template('detail.html', title=entry.title, timespent=entry.timespent,
-							learned=entry.learned, resources=entry.resources)
+def details(entry=None):
+	print("\nTitle: ", entry, "\n")
+	post = models.Entry.get(models.Entry.title=='Chatbot')
+	return render_template('detail.html', title=post.title, timespent=post.timespent,
+							learned=post.learned, resources=post.resources)
+							
+
 	
 @app.route('/')
 def index():
