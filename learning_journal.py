@@ -34,8 +34,7 @@ def details(title):
 @app.route('/entry', methods=['GET', 'POST'])
 def add():
 	form = forms.EntryForm()
-	print(form.errors)
-	if request.method == 'POST' and form.validate_on_submit():
+	if form.validate_on_submit():
 		flash('Entry submission successful!', 'success')
 		models.Entry.create_entry(
 			title=form.title.data,
@@ -46,7 +45,8 @@ def add():
 		)
 		return redirect(url_for('list'))
 	else:
-		return 'FAILED!'
+		flash('Failed!')
+	print(form.errors)
 	return render_template('new.html', form=form)
 	
 @app.route('/')
