@@ -35,7 +35,6 @@ def details(title):
 def add():
 	form = forms.EntryForm()
 	print(form.errors)
-	print('NEXT')
 	if request.method == 'POST' and form.validate_on_submit():
 		flash('Entry submission successful!', 'success')
 		models.Entry.create_entry(
