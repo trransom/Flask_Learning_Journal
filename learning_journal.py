@@ -7,15 +7,27 @@ import forms
 app = Flask(__name__)
 app.secret_key = 'wsdgppweoi38598712e'
 
+#@app.before_request
+#def before_request():
+#	'''Connect to the database before each request.'''
+#	g.db = models.DATABASE
+#	g.db.connect()
+#	
+#@app.after_request
+#def after_request(response):
+#	'''Close the database connection after each request.'''
+#	g.db.close()
+#	return response
+
 @app.route('/entries', methods=('GET', 'POST'))
 def list():
 	stream = models.Entry.select().limit(100)
 	return render_template('index.html', stream=stream)
 	
-@app.route('/details', methods=('GET', 'POST'))
-def details(entry=None):
-	print("\nTitle: ", entry, "\n")
-	post = models.Entry.get(models.Entry.title=='Chatbot')
+@app.route('/details/<title>')
+def details(title):
+	print("\nTitle: ", title, "\n")
+	post = models.Entry.get(models.Entry.title==title)
 	return render_template('detail.html', entry=post, title=post.title, timespent=post.timespent,
 							learned=post.learned, resources=post.resources)
 							
@@ -23,7 +35,7 @@ def details(entry=None):
 def add():
 	form = forms.EntryForm()
 	if form.validate_on_submit():
-		flash('Entry submission successful!')
+		flash('Entry submission successful!', 'success')
 		models.Entry.create_entry(
 			title=form.title.data,
 			date=form.date.data,
@@ -31,7 +43,7 @@ def add():
 			learned=form.learned.data,
 			resources=form.resources.data
 		)
-		return redirect(url_for('index'))
+		return redirect(url_for('list'))
 	else: 
 		print('Not working')
 	return render_template('new.html', form=form)
@@ -48,6 +60,7 @@ def edit(entry=None):
 		models.Entry.edit_entry(entry, form.title.data, form.date.data,
 								form.timespent.data, form.learned.data,
 								form.resources.data)
+		return redirect(url_for('list'))
 	return render_template('edit.html', form=form)
 	
 @app.route('/delete')

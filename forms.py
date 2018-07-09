@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, IntegerField, TextField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 import datetime
@@ -10,7 +10,7 @@ def title_exists(form, field):
 		raise ValidationError('This title already exists')
 		
 		
-class EntryForm(Form):
+class EntryForm(FlaskForm):
 	title=StringField(
 		'Title',
 		validators=[DataRequired(), title_exists]
@@ -38,7 +38,7 @@ class EntryForm(Form):
 		validators=[DataRequired()]
 		)
 		
-class EditForm(Form):
+class EditForm(FlaskForm):
 	title=StringField(
 		'Title',
 		validators=[DataRequired(), title_exists]
