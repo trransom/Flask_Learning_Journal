@@ -21,13 +21,7 @@ class EntryForm(FlaskForm):
 	)
 	timespent=IntegerField(
 		'Time Spent (in hours)',
-		validators=[
-			DataRequired(),
-			Regexp(
-				r'^[0-9]+$',
-				message=('Time spent should only be entered as digits.')
-			)
-			]
+		validators=[DataRequired()]
 	)
 	learned=TextField(
 		'Learned',

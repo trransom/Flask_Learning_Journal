@@ -1,4 +1,4 @@
-from flask import (Flask, g, render_template, flash, redirect, url_for)
+from flask import (Flask, g, render_template, flash, redirect, url_for, request)
 #from flask_login import LoginManager
 
 import models
@@ -7,17 +7,17 @@ import forms
 app = Flask(__name__)
 app.secret_key = 'wsdgppweoi38598712e'
 
-#@app.before_request
-#def before_request():
-#	'''Connect to the database before each request.'''
-#	g.db = models.DATABASE
-#	g.db.connect()
-#	
-#@app.after_request
-#def after_request(response):
-#	'''Close the database connection after each request.'''
-#	g.db.close()
-#	return response
+@app.before_request
+def before_request():
+	'''Connect to the database before each request.'''
+	g.db = models.DATABASE
+	g.db.connect()
+	
+@app.after_request
+def after_request(response):
+	'''Close the database connection after each request.'''
+	g.db.close()
+	return response
 
 @app.route('/entries', methods=('GET', 'POST'))
 def list():
@@ -31,7 +31,7 @@ def details(title):
 	return render_template('detail.html', entry=post, title=post.title, timespent=post.timespent,
 							learned=post.learned, resources=post.resources)
 							
-@app.route('/entry')
+@app.route('/entry', methods=['GET', 'POST'])
 def add():
 	form = forms.EntryForm()
 	if form.validate_on_submit():
@@ -44,8 +44,8 @@ def add():
 			resources=form.resources.data
 		)
 		return redirect(url_for('list'))
-	else: 
-		print('Not working')
+	else:
+		flash('Failed!')
 	return render_template('new.html', form=form)
 	
 @app.route('/')

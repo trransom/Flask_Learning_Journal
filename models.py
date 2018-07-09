@@ -18,13 +18,14 @@ class Entry(Model):
 	@classmethod
 	def create_entry(cls, title, date, timespent, learned, resources):
 		try:
-			cls.create(
-				title=title,
-				date=date,
-				timespent=timespent,
-				learned=learned,
-				resources=resources
-			)
+			with DATABASE.transaction():
+				cls.create(
+					title=title,
+					date=date,
+					timespent=timespent,
+					learned=learned,
+					resources=resources
+				)
 		except IntegrityError:
 			raise ValueError('Entry already exists')
 			
