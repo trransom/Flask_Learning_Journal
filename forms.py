@@ -34,28 +34,17 @@ class EntryForm(FlaskForm):
 		
 class EditForm(FlaskForm):
 	title=StringField(
-		'Title',
-		validators=[DataRequired(), title_exists]
+		'Title'
 		)
 	date=DateField(
-		'Date',
-		validators=[DataRequired()]
+		'Date'
 	)
 	timespent=IntegerField(
-		'Time Spent (in hours)',
-		validators=[
-			DataRequired(),
-			Regexp(
-				r'^[0-9]+$',
-				message=('Time spent should only be entered as digits.')
-			)
-			]
+		'Time Spent (in hours)'
 	)
 	learned=TextField(
-		'Learned',
-		validators=[DataRequired()]
+		'Learned'
 	)
 	resources=TextField(
-		'Resources Used',
-		validators=[DataRequired()]
+		'Resources Used'
 		)

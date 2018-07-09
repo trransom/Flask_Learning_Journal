@@ -53,21 +53,31 @@ def add():
 def index():
 	return 'Hey'
 	
-@app.route('/edit')
-def edit(entry=None):
+@app.route('/edit/<entry_title>', methods=['GET', 'POST'])
+def edit(entry_title):
+	print(entry_title)
 	form = forms.EditForm()
 	if form.validate_on_submit():
-		flash('Entry update successful!')
-		models.Entry.edit_entry(entry, form.title.data, form.date.data,
-								form.timespent.data, form.learned.data,
-								form.resources.data)
+		flash('Entry update successful!', 'success')
+		models.Entry.edit_entry(
+			entry_title, 
+			form.title.data, 
+			form.date.data,
+			form.timespent.data, 
+			form.learned.data,
+			form.resources.data
+			)
 		return redirect(url_for('list'))
+	else:
+		flash('Failed!')
+	print(form.errors)
 	return render_template('edit.html', form=form)
 	
-@app.route('/delete')
-def delete():
-	return 'DELETE'
-	
+@app.route('/delete/<title_del>')
+def delete_inst(title_del):
+	models.Entry.delete_entry(title_del)
+	flash('Successfully deleted!')
+	return redirect(url_for('list'))
 	
 if __name__ == '__main__':
 	models.initialize()
