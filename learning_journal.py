@@ -26,7 +26,6 @@ def list():
 	
 @app.route('/details/<title>')
 def details(title):
-	print("\nTitle: ", title, "\n")
 	post = models.Entry.get(models.Entry.title==title)
 	return render_template('detail.html', entry=post, title=post.title, timespent=post.timespent,
 							learned=post.learned, resources=post.resources)
@@ -51,7 +50,7 @@ def add():
 	
 @app.route('/')
 def index():
-	return 'Hey'
+	return redirect(url_for('list'))
 	
 @app.route('/edit/<entry_title>', methods=['GET', 'POST'])
 def edit(entry_title):
