@@ -18,8 +18,7 @@ header .site-header {
 	margin: 0 auto;
 	height: 95px;
 	background-color: #474747;
-	padding: 40px 0;
-	width: 100%;
+	padding: 70px;
 }
 header .logo i {
 	color: red;
@@ -30,6 +29,14 @@ header .logo i {
 header .button {
 	float: right;
 	margin: 33px 40px;
+	position: auto;
+}
+header .app-name {
+	color: white;
+	float: left;
+	margin: 33px 40px;
+	text-align: center;
+	position: relative;
 }
 footer {
 	text-align: center;
