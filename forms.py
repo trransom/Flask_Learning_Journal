@@ -12,6 +12,7 @@ def title_exists(form, field):
 		
 		
 class EntryForm(FlaskForm):
+	'''Form to create an entry.'''
 	title=StringField(
 		'Title',
 		validators=[DataRequired(), title_exists]
@@ -34,6 +35,7 @@ class EntryForm(FlaskForm):
 		)
 		
 class EditForm(FlaskForm):
+	'''Form to edit an entry.'''
 	title=StringField(
 		'Title'
 		)
