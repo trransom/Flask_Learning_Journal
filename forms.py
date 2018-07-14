@@ -6,6 +6,7 @@ import datetime
 from models import Entry
 
 def title_exists(form, field):
+	'''Tests to see if title exists in journal.'''
 	if Entry.select().where(Entry.title == field.data).exists():
 		raise ValidationError('This title already exists')
 		
@@ -48,3 +49,4 @@ class EditForm(FlaskForm):
 	resources=TextField(
 		'Resources Used'
 		)
+		

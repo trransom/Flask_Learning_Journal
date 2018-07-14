@@ -21,17 +21,20 @@ def after_request(response):
 
 @app.route('/entries', methods=('GET', 'POST'))
 def list():
+	'''Lists all of the journal entries'''
 	stream = models.Entry.select().limit(100)
 	return render_template('index.html', stream=stream)
 	
 @app.route('/details/<title>')
 def details(title):
+	'''Displays the details of the selected entry'''
 	post = models.Entry.get(models.Entry.title==title)
 	return render_template('detail.html', entry=post, title=post.title, timespent=post.timespent,
 							learned=post.learned, resources=post.resources)
 							
 @app.route('/entry', methods=['GET', 'POST'])
 def add():
+	'''Allows the user to add a journal entry'''
 	form = forms.EntryForm()
 	if form.validate_on_submit():
 		flash('Entry submission successful!', 'success')
@@ -50,10 +53,12 @@ def add():
 	
 @app.route('/')
 def index():
+	'''Redirects to list url'''
 	return redirect(url_for('list'))
 	
 @app.route('/edit/<entry_title>', methods=['GET', 'POST'])
 def edit(entry_title):
+	'''Allows user to edit a journal entry'''
 	print(entry_title)
 	form = forms.EditForm()
 	if form.validate_on_submit():
@@ -74,30 +79,11 @@ def edit(entry_title):
 	
 @app.route('/delete/<title_del>')
 def delete_inst(title_del):
+	'''Allows the user to delete a journal entry'''
 	models.Entry.delete_entry(title_del)
 	flash('Successfully deleted!')
 	return redirect(url_for('list'))
 	
 if __name__ == '__main__':
 	models.initialize()
-#	try:
-#		models.Entry.create_entry(
-#			title='Chatbot',
-#			date='2018-01-01',
-#			timespent=30,
-#			learned='I learned about hidden Markov models',
-#			resources='Textblob'
-#		)
-#	except ValueError:
-#		pass
-#		
-#	try:
-#		models.Entry.create_entry(
-#			title='Python',
-#			timespent=30,
-#			learned='I learned about inheritance',
-#			resources='Treehouse'
-#		)
-#	except ValueError:
-#		pass
 	app.run(debug=True)
