@@ -29,8 +29,7 @@ def list():
 def details(title):
 	'''Displays the details of the selected entry'''
 	post = models.Entry.get(models.Entry.title==title)
-	return render_template('detail.html', entry=post, title=post.title, timespent=post.timespent,
-							learned=post.learned, resources=post.resources)
+	return render_template('detail.html', entry=post)
 							
 @app.route('/entry', methods=['GET', 'POST'])
 def add():

@@ -23,20 +23,20 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
-                        <h1>{{ title }}</h1>
+                        <h1>{{ entry.title }}</h1>
                         <time datetime="2016-01-31">January 31, 2016</time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
-                            <p>{{ timespent }} hours</p>
+                            <p>{{ entry.timespent }} hours</p>
                         </div>
                         <div class="entry">
                             <h3>What I Learned:</h3>
-                            <p>{{ learned }}</p>
+                            <p>{{ entry.learned }}</p>
 							</div>
                         <div class="entry">
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <p>{{ resources }}</p>
+                                <p>{{ entry.resources }}</p>
                             </ul>
                         </div>
                     </article>
