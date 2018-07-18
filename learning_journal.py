@@ -1,5 +1,4 @@
 from flask import (Flask, g, render_template, flash, redirect, url_for, request)
-#from flask_login import LoginManager
 
 import models
 import forms
@@ -30,7 +29,7 @@ def details(title):
 	'''Displays the details of the selected entry'''
 	post = models.Entry.get(models.Entry.title==title)
 	return render_template('detail.html', entry=post)
-							
+	
 @app.route('/entry', methods=['GET', 'POST'])
 def add():
 	'''Allows the user to add a journal entry'''
@@ -58,7 +57,6 @@ def index():
 @app.route('/edit/<entry_title>', methods=['GET', 'POST'])
 def edit(entry_title):
 	'''Allows user to edit a journal entry'''
-	print(entry_title)
 	form = forms.EditForm()
 	if form.validate_on_submit():
 		flash('Entry update successful!', 'success')
