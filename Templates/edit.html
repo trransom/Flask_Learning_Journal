@@ -33,9 +33,9 @@
                         <label for="timespent"> Time Spent</label>
                         <input id="timespent" type="text" name="timespent" value={{ form.timespent.data }}><br>
                         <label for="learned">What I Learned</label>
-                        <textarea id="learned" rows="5" name="learned" value={{ form.learned.data }}></textarea>
+                        <textarea id="learned" rows="5" name="learned">{{ form.learned.data }}</textarea>
                         <label for="resources">Resources to Remember</label>
-                        <textarea id="resources" rows="5" name="resources" value="PLACEHOLDER"{{ form.resources.data }}></textarea>
+                        <textarea id="resources" rows="5" name="resources">{{ form.resources.data }}</textarea>
                         <input type="submit" value="Edit Entry" class="button">
                         <a href="{{ url_for('list') }}" class="button button-secondary">Cancel</a>
                     </form>
