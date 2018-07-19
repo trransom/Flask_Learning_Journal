@@ -57,7 +57,8 @@ def index():
 @app.route('/edit/<entry_title>', methods=['GET', 'POST'])
 def edit(entry_title):
 	'''Allows user to edit a journal entry'''
-	form = forms.EditForm()
+	post = models.Entry.get(models.Entry.title==entry_title)
+	form = forms.EditForm(obj=post)
 	if form.validate_on_submit():
 		flash('Entry update successful!', 'success')
 		models.Entry.edit_entry(

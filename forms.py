@@ -37,18 +37,13 @@ class EntryForm(FlaskForm):
 class EditForm(FlaskForm):
 	'''Form to edit an entry.'''
 	title=StringField(
-		'Title', validators=[DataRequired()]
 		)
 	date=DateField(
-		'Date', validators=[DataRequired()]
 	)
 	timespent=IntegerField(
-		'Time Spent (in hours)', validators=[DataRequired()]
 	)
 	learned=TextField(
-		'Learned', validators=[DataRequired()]
 	)
 	resources=TextField(
-		'Resources Used', validators=[DataRequired()]
 		)
 		
